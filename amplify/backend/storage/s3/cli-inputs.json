@@ -1,0 +1,16 @@
+{
+  "resourceName": "s3",
+  "policyUUID": "5cacb958",
+  "bucketName": "mybookstore77c7b688db1d4dafbfa07373bcf59bd4",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

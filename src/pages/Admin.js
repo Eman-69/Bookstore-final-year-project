@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import { API, graphqlOperation, Storage } from "aws-amplify";
-import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import { generateClient } from "aws-amplify/api";
+import {uploadData,getProperties} from "aws-amplify/storage";
+import { withAuthenticator} from '@aws-amplify/ui-react';
+import { signOut } from '@aws-amplify/auth';
 import { createBook } from '../api/mutations'
-import config from '../aws-exports'
+import config from '../amplifyconfiguration.json'
+import '@aws-amplify/ui-react/styles.css';
 
 const {
     aws_user_files_s3_bucket_region: region,
@@ -14,12 +17,12 @@ const {
 const Admin = () => {
     const [image, setImage] = useState(null);
     const [bookDetails, setBookDetails] = useState({ title: "", description: "", image: "", author: "", price: "" });
-
+    const client=generateClient();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             if (!bookDetails.title || !bookDetails.price) return
-            await API.graphql(graphqlOperation(createBook, { input: bookDetails }))
+            await client.graphql({query:createBook,input: bookDetails })
             setBookDetails({ title: "", description: "", image: "", author: "", price: "" })
         } catch (err) {
             console.log('error creating todo:', err)
@@ -35,12 +38,12 @@ const Admin = () => {
         const url = `https://${bucket}.s3.${region}.amazonaws.com/public/${key}`
         try {
             // Upload the file to s3 with public access level. 
-            await Storage.put(key, file, {
+            await uploadData(key, file, {
                 level: 'public',
                 contentType: file.type
             });
             // Retrieve the uploaded file to display
-            const image = await Storage.get(key, { level: 'public' })
+            const image = await getProperties(key, { level: 'public' })
             setImage(image);
             setBookDetails({ ...bookDetails, image: url });
         } catch (err) {
@@ -50,11 +53,10 @@ const Admin = () => {
 
     return (
         <section className="admin-wrapper">
-            <AmplifyAuthenticator>
                 <section>
                     <header className="form-header">
                         <h3>Add New Book</h3>
-                        <AmplifySignOut></AmplifySignOut>
+                        <button onClick={async()=>signOut({global:true})}>Sign Out</button>
                     </header>
                     <form className="form-wrapper" onSubmit={handleSubmit}>
                         <div className="form-image">
@@ -121,9 +123,8 @@ const Admin = () => {
                         </div>
                     </form>
                 </section>
-            </AmplifyAuthenticator>
         </section>
     )
 }
 
-export default Admin
+export default withAuthenticator(Admin);

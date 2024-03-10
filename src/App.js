@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Amplify
-import Amplify from "aws-amplify";
+import {Amplify} from "aws-amplify";
 
 // Pages
 import Home from "./pages/Home"
@@ -16,38 +16,25 @@ import Admin from './pages/Admin';
 import Header from "./components/Header"
 
 // Amplify Configurations
-import awsExports from "./aws-exports";
-Amplify.configure(awsExports);
+import amplifyConfig from "./amplifyconfiguration.json";
+Amplify.configure(amplifyConfig);
 
 
 const App = () => {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-        <Route path="/checkout">
-          <Checkout />
-        </Route>
-        <Route exact path="/books">
-          <Books />
-        </Route>
+      <Routes>
+        <Route exact path="/" element={<Home/>}/>
+        <Route path="/cart" element={<Cart />}/>
+        <Route path="/checkout" element={<Checkout/>}/>
+        <Route exact path="/books" element={<Books />}/>
         <Route
           path="/books/:id"
-          children={<BookDetails></BookDetails>}>
-        </Route>
-        <Route path="/admin">
-          <Admin />
-        </Route>
-        <Route path="*">
-          <Error />
-        </Route>
-      </Switch>
+          element={<BookDetails/>}/>
+        <Route path="/admin" element={<Admin />}/>
+        <Route path="*"element={ <Error />}/>
+      </Routes>
     </Router>
   );
 }

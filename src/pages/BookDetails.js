@@ -5,7 +5,7 @@ import { CartContext } from "../context/cart";
 
 const BookDetails = () => {
   const { id } = useParams();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { books } = useContext(BookContext);
   const { addToCart } = useContext(CartContext);
 
@@ -32,7 +32,7 @@ const BookDetails = () => {
           className="btn"
           onClick={() => {
             addToCart({ ...book, id });
-            history.push("/cart");
+            navigate.push("/cart");
           }}
         >
           Add to Cart

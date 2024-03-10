@@ -1,13 +1,23 @@
 {
   "api": {
     "mybookstore": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mybookstore1b1b464b"
+        }
+      ],
       "output": {
         "authConfig": {
           "additionalAuthenticationProviders": [
             {
               "apiKeyConfig": {
+                "apiKeyExpirationDate": "2025-03-10T06:17:25.760Z",
                 "apiKeyExpirationDays": 365,
-                "description": "guest user read books"
+                "description": "guest user access book"
               },
               "authenticationType": "API_KEY"
             }

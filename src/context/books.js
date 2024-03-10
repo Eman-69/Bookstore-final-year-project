@@ -22,7 +22,7 @@ const BookProvider = ({ children }) => {
       ...orderDetails
     };
     try {
-      await client.graphql({query: processOrder, input: payload });
+      await client.graphql({query: processOrder,variable:{ input: payload }});
       console.log("Order is successful");
     } catch (err) {
       console.log(err);
@@ -35,7 +35,7 @@ const BookProvider = ({ children }) => {
       // Switch authMode to API_KEY for public access
       const { data } = await client.graphql({
         query: listBooks,
-        authMode: "API_KEY"
+        authMode: "apiKey"
       });
       const books = data.listBooks.items;
       const featured = books.filter((book) => {

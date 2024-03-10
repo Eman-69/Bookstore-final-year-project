@@ -23,16 +23,14 @@ Amplify.configure(amplifyConfig);
 const App = () => {
   return (
     <Router>
-      <Header />
+      <Header/>
       <Routes>
         <Route exact path="/" element={<Home/>}/>
-        <Route path="/cart" element={<Cart />}/>
-        <Route path="/checkout" element={<Checkout/>}/>
-        <Route exact path="/books" element={<Books />}/>
-        <Route
-          path="/books/:id"
-          element={<BookDetails/>}/>
-        <Route path="/admin" element={<Admin />}/>
+        <Route path="cart" element={<Cart />}/>
+        <Route path="checkout" element={<Checkout/>}/>
+        <Route exact path="books" element={<Books />}/>
+        <Route path="books/:id" element={<BookDetails/>}/>
+        <Route path="admin" element={<Admin />}/>
         <Route path="*"element={ <Error />}/>
       </Routes>
     </Router>

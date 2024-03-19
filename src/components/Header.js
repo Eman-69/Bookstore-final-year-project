@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     return (
         <header className="main-head">
-            <nav>
-                <h1 id="logo">Wisdomly</h1>
+            <nav className='px-0'>
+                <h1 id="logo">NITTE</h1>
                 <ul>
                     <li>
                         <Link to="/">Home</Link>

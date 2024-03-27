@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 const Footer=()=>{
     return (
-        <div>
-        <div className="bg-blue py-4"></div>        
-        <div className='bg-yellow py-4'>
-        <div className="container mx-auto px-4">
+        <div>      
+        <div className="bg-yellow shadow-lg featured-head py-8 flex">
+            </div>
+        <div className='bg-blue py-4'>
+        <div className="py-4 container mx-auto px-4">
             <nav className="flex justify-center">
             <Link to="/" className="mx-2">Home</Link>
             <Link to="/books" className="mx-2">Books</Link>

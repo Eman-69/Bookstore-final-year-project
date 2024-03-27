@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import BookDetails from "./pages/BookDetails";
 import Admin from './pages/Admin';
+import About from './pages/About';
 import './index.css';
 // Components
 import Header from "./components/Header"
@@ -25,9 +26,9 @@ const App = () => {
   return (
     <Router>
       <Header/>
-      <div className='min-h-screen bg-image'>
       <Routes>
         <Route exact path="/" element={<Home/>}/>
+        <Route path="about" element={<About/>}/>
         <Route path="cart" element={<Cart />}/>
         <Route path="checkout" element={<Checkout/>}/>
         <Route exact path="books" element={<Books />}/>
@@ -35,7 +36,6 @@ const App = () => {
         <Route path="admin" element={<Admin />}/>
         <Route path="*"element={ <Error />}/>
       </Routes>
-      </div>
       <Footer/>
     </Router>
   );

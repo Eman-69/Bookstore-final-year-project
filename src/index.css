@@ -9,3 +9,8 @@
   background-size: cover;
   background-position: center;
 }
+.about-image {
+  background-image: url('assets/about2.png');
+  background-size: cover;
+  background-position: center; 
+}
